@@ -46,24 +46,33 @@ header {
   height: var(--height);
   margin: 28px 12px;
 }
-header img {
+header > img {
   height: 100%;
 }
-header label {
+header > label {
   cursor: pointer;
-}
-header label:has(svg) {
+  z-index: 60;
   height: var(--height);
   aspect-ratio: 1;
   display: flex;
   align-items: safe center;
   justify-content: safe center;
 }
-header label:has(svg) svg {
-  height: 100%;
+header > label svg path {
+  transform-origin: center;
+  transition: all ease-in 0.2s;
 }
 header input[type=checkbox] {
   display: none;
+}
+header input[type=checkbox]:checked ~ label svg path:first-child {
+  transform: rotate(225deg) translateY(7px);
+}
+header input[type=checkbox]:checked ~ label svg path:nth-child(2) {
+  transform: rotate(135deg);
+}
+header input[type=checkbox]:checked ~ label svg path:nth-child(3) {
+  transform: rotate(45deg) translateY(-7px);
 }
 header input[type=checkbox]:checked ~ nav {
   z-index: 50;
@@ -99,11 +108,6 @@ header nav {
   transition: visibility 0s 0.3s, right ease 0.3s;
   background: hsl(36, 100%, 99%);
 }
-header nav label {
-  position: absolute;
-  top: 28px;
-  right: 28px;
-}
 header nav ul {
   display: flex;
   flex-direction: column;
@@ -128,7 +132,7 @@ header nav ul li {
   gap: 16px;
 }
 .top-article img {
-  max-width: 100%;
+  width: 100%;
 }
 .top-article h1 {
   font-size: 40px;
@@ -237,9 +241,6 @@ header nav ul li {
   }
   header {
     --height: 35px;
-  }
-  header nav label {
-    right: 60px;
   }
   header nav ul {
     padding-left: 60px;
