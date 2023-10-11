@@ -34,7 +34,7 @@ a:hover {
 
 .container {
   display: grid;
-  grid-template-rows: auto auto 60px auto 60px auto 80px;
+  grid-template-rows: auto auto;
   margin: 0 16px;
 }
 
@@ -65,13 +65,18 @@ header > label svg path {
 header input[type=checkbox] {
   display: none;
 }
-header input[type=checkbox]:checked ~ label svg path:first-child {
+header input[type=checkbox]:checked ~ label:has(svg) {
+  position: fixed;
+  top: 28px;
+  right: 28px;
+}
+header input[type=checkbox]:checked ~ label:has(svg) svg path:first-child {
   transform: rotate(225deg) translateY(7px);
 }
-header input[type=checkbox]:checked ~ label svg path:nth-child(2) {
+header input[type=checkbox]:checked ~ label:has(svg) svg path:nth-child(2) {
   transform: rotate(135deg);
 }
-header input[type=checkbox]:checked ~ label svg path:nth-child(3) {
+header input[type=checkbox]:checked ~ label:has(svg) svg path:nth-child(3) {
   transform: rotate(45deg) translateY(-7px);
 }
 header input[type=checkbox]:checked ~ nav {
@@ -122,23 +127,26 @@ header nav ul li {
   list-style-type: none;
 }
 
-.desktop {
-  display: none;
+main {
+  display: grid;
+  grid-template-rows: auto 60px auto 60px auto 80px;
 }
-
-.top-article {
+main .top-article {
   display: grid;
   justify-items: start;
   gap: 16px;
 }
-.top-article img {
+main .top-article img {
   width: 100%;
 }
-.top-article h1 {
+main .top-article .desktop {
+  display: none;
+}
+main .top-article h1 {
   font-size: 40px;
   font-weight: 800;
 }
-.top-article a {
+main .top-article a {
   position: relative;
   padding: 16px 32px;
   overflow: hidden;
@@ -149,7 +157,7 @@ header nav ul li {
   letter-spacing: 0.3em;
   color: hsl(36, 100%, 99%);
 }
-.top-article a::before {
+main .top-article a::before {
   content: "";
   display: block;
   position: absolute;
@@ -162,7 +170,7 @@ header nav ul li {
   background-color: hsl(240, 100%, 5%);
   transition: left ease 0.3s;
 }
-.top-article a::after {
+main .top-article a::after {
   content: "";
   display: block;
   position: absolute;
@@ -173,50 +181,48 @@ header nav ul li {
   height: 100%;
   background-color: hsl(5, 85%, 63%);
 }
-.top-article a:hover::before {
+main .top-article a:hover::before {
   left: -5%;
 }
-
-.new-articles {
-  grid-row: 4/5;
+main .new-articles {
+  grid-row: 3/4;
   display: flex;
   flex-direction: column;
   padding: 28px 20px;
   background-color: hsl(240, 100%, 5%);
 }
-.new-articles h2 {
+main .new-articles h2 {
   margin: 0;
   font-size: 28px;
   color: hsl(35, 77%, 62%);
 }
-.new-articles article {
+main .new-articles article {
   margin-top: 32px;
 }
-.new-articles article:not(:last-child) {
+main .new-articles article:not(:last-child) {
   padding-bottom: 32px;
   border-bottom: 1px solid hsl(236, 13%, 42%);
 }
-.new-articles article h3 {
+main .new-articles article h3 {
   margin-bottom: 8px;
 }
-.new-articles article p {
+main .new-articles article p {
   color: hsl(233, 8%, 79%);
 }
-.new-articles article a {
+main .new-articles article a {
   color: hsl(36, 100%, 99%);
 }
-.new-articles article a:hover {
+main .new-articles article a:hover {
   color: hsl(35, 77%, 62%);
 }
-
-.ranking {
-  grid-row: 6/7;
+main .ranking {
+  grid-row: 5/6;
   display: grid;
   grid-template-rows: repeat(3, auto);
   grid-template-columns: auto;
   gap: 32px;
 }
-.ranking article {
+main .ranking article {
   display: grid;
   grid-template-columns: 100px auto;
   grid-template-rows: repeat(3, auto);
@@ -224,12 +230,12 @@ header nav ul li {
   row-gap: 12px;
   align-items: center;
 }
-.ranking article span {
+main .ranking article span {
   font-size: 28px;
   font-weight: 700;
   color: hsl(233, 8%, 79%);
 }
-.ranking article img {
+main .ranking article img {
   grid-row: 1/4;
   grid-column: 1/2;
   width: 100px;
@@ -242,11 +248,14 @@ header nav ul li {
   header {
     --height: 35px;
   }
+  header input:checked ~ .menu-icon {
+    right: 60px;
+  }
   header nav ul {
     padding-left: 60px;
   }
   .desktop {
-    display: block;
+    display: block !important;
   }
   .mobile {
     display: none;
@@ -283,10 +292,7 @@ header nav ul li {
     justify-content: safe center;
   }
   .container {
-    grid-template-rows: auto auto auto;
-    grid-template-columns: 2fr 1fr;
     row-gap: 40px;
-    column-gap: 32px;
     max-width: 1110px;
     margin: 60px 32px;
   }
@@ -294,48 +300,54 @@ header nav ul li {
     grid-column: 1/3;
     margin: 0;
   }
-  .top-article {
+  main {
+    grid-template-rows: repeat(2, auto);
+    grid-template-columns: 2fr 1fr;
+    row-gap: 40px;
+    column-gap: 32px;
+  }
+  main .top-article {
     grid-template-rows: repeat(3, auto);
     grid-template-columns: repeat(2, 1fr);
     row-gap: 36px;
     column-gap: 28px;
   }
-  .top-article img {
+  main .top-article img {
     grid-row: 1/2;
     grid-column: 1/3;
   }
-  .top-article h1 {
+  main .top-article h1 {
     grid-row: 2/4;
     grid-column: 1/2;
     font-size: 52px;
   }
-  .top-article p {
+  main .top-article p {
     grid-row: 2/3;
     grid-column: 2/3;
   }
-  .top-article a {
+  main .top-article a {
     grid-row: 3/4;
     grid-column: 2/3;
     align-self: end;
   }
-  .new-articles {
-    grid-row: 2/3;
+  main .new-articles {
+    grid-row: 1/2;
     grid-column: 2/3;
     justify-content: center;
     padding: 28px 24px;
   }
-  .new-articles h2 {
+  main .new-articles h2 {
     font-size: 40px;
   }
-  .ranking {
-    grid-row: 3/4;
+  main .ranking {
+    grid-row: 2/3;
     grid-column: 1/3;
     grid-template-rows: auto;
     grid-template-columns: repeat(3, auto);
     gap: 16px;
     padding: 32px 0;
   }
-  .ranking article {
+  main .ranking article {
     justify-content: space-between;
     row-gap: 0;
   }
