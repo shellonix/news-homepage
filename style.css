@@ -75,37 +75,37 @@ header input[type=checkbox]:checked ~ label svg path:nth-child(3) {
   transform: rotate(45deg) translateY(-7px);
 }
 header input[type=checkbox]:checked ~ nav {
-  z-index: 50;
   visibility: visible;
   right: 0;
-  transition: visibility 0s, right ease 0.3s;
+  transition: visibility 0s, right ease-out 0.3s;
 }
 header input[type=checkbox]:checked ~ .menu-bg {
-  z-index: 50;
   visibility: visible;
   opacity: 1;
-  transition: visibility 0s, opacity ease 0.3s;
+  transition: visibility 0s, opacity ease-out 0.3s;
 }
 header .menu-bg {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 50;
   width: 100vw;
   height: 100vh;
   visibility: hidden;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  transition: visibility 0s 0.3s, opacity ease 0.3s;
+  transition: visibility 0s 0.3s, opacity ease-out 0.3s;
   font-size: 16px;
 }
 header nav {
   position: fixed;
   top: 0;
   right: -70vw;
+  z-index: 55;
   visibility: hidden;
   width: 70vw;
   height: 100vh;
-  transition: visibility 0s 0.3s, right ease 0.3s;
+  transition: visibility 0s 0.3s, right ease-out 0.3s;
   background: hsl(36, 100%, 99%);
 }
 header nav ul {

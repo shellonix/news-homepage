@@ -99,17 +99,15 @@ header {
     }
 
     &:checked ~ nav {
-      z-index: 50;
       visibility: visible;
       right: 0;
-      transition: visibility 0s, right ease $transition-time;
+      transition: visibility 0s, right ease-out $transition-time;
     }
 
     &:checked ~ .menu-bg {
-      z-index: 50;
       visibility: visible;
       opacity: 1;
-      transition: visibility 0s, opacity ease $transition-time;
+      transition: visibility 0s, opacity ease-out $transition-time;
     }
   }
 
@@ -117,12 +115,14 @@ header {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 50;
     width: 100vw;
     height: 100vh;
     visibility: hidden;
     opacity: 0;
     background-color: rgba(0, 0, 0, 0.7);
-    transition: visibility 0s $transition-time, opacity ease $transition-time;
+    transition: visibility 0s $transition-time,
+      opacity ease-out $transition-time;
     font-size: 16px;
   }
 
@@ -130,10 +130,11 @@ header {
     position: fixed;
     top: 0;
     right: -70vw;
+    z-index: 55;
     visibility: hidden;
     width: 70vw;
     height: 100vh;
-    transition: visibility 0s $transition-time, right ease $transition-time;
+    transition: visibility 0s $transition-time, right ease-out $transition-time;
     background: $off-white;
 
     ul {
