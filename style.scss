@@ -305,7 +305,7 @@ main {
     --height: 35px;
 
     input:checked ~ .menu-icon {
-      right: 60px;
+      right: 60px !important;
     }
 
     nav {

@@ -249,7 +249,7 @@ main .ranking article img {
     --height: 35px;
   }
   header input:checked ~ .menu-icon {
-    right: 60px;
+    right: 60px !important;
   }
   header nav ul {
     padding-left: 60px;
